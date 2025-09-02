@@ -1,0 +1,34 @@
+
+public class UserService
+{
+    public string GetUserData(int userId)
+    {
+        SqlConnection conn = new SqlConnection("Server=myServer;Database=myDB;User Id=myUser;Password=myPass;");
+        conn.Open();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Users WHERE Id = " + userId, conn);
+        SqlDataReader reader = cmd.ExecuteReader();
+        string result = "";
+        while(reader.Read())
+        {
+            result += reader["Name"].ToString();
+        }
+        conn.Close();
+        return result;
+    }
+
+    public string GetUserDataDuplicate(int userId)
+    {
+        // Código duplicado innecesariamente
+        SqlConnection conn = new SqlConnection("Server=myServer;Database=myDB;User Id=myUser;Password=myPass;");
+        conn.Open();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Users WHERE Id = " + userId, conn);
+        SqlDataReader reader = cmd.ExecuteReader();
+        string result = "";
+        while(reader.Read())
+        {
+            result += reader["Name"].ToString();
+        }
+        conn.Close();
+        return result;
+    }
+}
