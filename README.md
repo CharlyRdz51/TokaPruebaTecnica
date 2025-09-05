@@ -16,3 +16,10 @@ Siempre y cuando sea un administrador quien ingresa al sistema, utilizar una api
 Independientemente de quien se logeo, que pase por una red privada para no tener trafico con posible acceso al publico.
 
 Esta red privada virtual debera pasar por un balancer para distriibuir la carga de trabajo y la alta volumetria del sistema, acompañada de un monitor de recursos para toda la infrastuctura de la base de datos y aplicativos web. Entre el balancer y el front estara una API REST para el control del CRUD.
+
+# Actividad 2 API REST ( Con Python )
+Para esta actividad subire el codigo a este repositorio, lenguaje utilizado Python con MySQL.
+
+El ORM tengo tiempo que no lo utilizo y estoy un poco oxidado. 
+
+# Actividad 3 Code Review
