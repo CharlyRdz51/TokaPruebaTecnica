@@ -23,3 +23,34 @@ Para esta actividad subire el codigo a este repositorio, lenguaje utilizado Pyth
 El ORM tengo tiempo que no lo utilizo y estoy un poco oxidado. 
 
 # Actividad 3 Code Review
+
+Para el analisis del codigo en Python noto lo siguiente: 
+Codigo repetido, se viola una de las mejores practicas en el desarollo que es " reutilizar codigo y evitar escribir lineas de codigo repetido "
+
+Si user_id viene de un input del usuario, se ejecuta directamente en el SQL Esto permite extraer datos no autorizados o incluso borrar tablas.
+**Grave vulnerabilidad de seguridad**.
+Solución: usar consultas parametrizadas.
+
+Es importante tener en cuenta que cada conexion sea cerrada manualmente, es decir asegurar que cada conexion que sea abierta sea cerrada, es importante utilizar conn.close() al ternimo de utilizar cada conexion.
+
+"User_id" no tiene el tipo de dato definido si es caracter, cadena, booleano, entero, flotante, operador logico, etc etc
+
+Un codigo mas eficiente podria ser el siguiente:
+
+import sqlite3
+
+def ObtenerDatosUsuario(user_id: int):
+    try:
+        with sqlite3.connect("database.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_id,))
+            return cursor.fetchone()
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return None
+
+
+
+
+
+
