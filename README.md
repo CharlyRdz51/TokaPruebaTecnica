@@ -36,6 +36,7 @@ Es importante tener en cuenta que cada conexion sea cerrada manualmente, es deci
 "User_id" no tiene el tipo de dato definido si es caracter, cadena, booleano, entero, flotante, operador logico, etc etc
 
 Un codigo mas eficiente podria ser el siguiente:
+```
 
 import sqlite3
 
@@ -48,9 +49,18 @@ def ObtenerDatosUsuario(user_id: int):
     except sqlite3.Error as e:
         print(f"Database error: {e}")
         return None
+```
 
+#Actividad 4 Desempeño bajo presión – Resolución de problema Objetivo: 
+Medir capacidad de tomar decisiones rápidas y resolver problemas. 
+*Instrucción:* 
+Simular una falla en producción: “Los usuarios no pueden guardar registros, la API responde 500”. 
 
+El candidato debe: - Formular hipótesis - Describir un plan de diagnóstico - Explicar cómo comunicaría el avance 
+Evaluación: - Lógica del análisis - Prioridad de acciones - Comunicación clara 
 
-
+En esta parte, si se siguieron las buenas practicas al desplegar este error ya sea en consola, en el navegador, o en un mensaje al usuario, los errores 500 involucran al servidor. 
+Por ende los primeros pasos seria validar la salud del servidor, que tenga conexion a la red, puede validarse mediante el cliente que presenta el error con una traza de las conexiones para determinar si en verdad es el servidor quien tiene problemas o es un segmento de la red que no permite que sea realizada la conexion, monitorear los recursos, analizar los logs, y encontrar la causa raiz. Ahora pueden ser distintos factores, la compatibilidad del dispositivo del usuario, el sistema operativo que utiliza ( que con una buena infraestructura utilizando docker o kubernetes esta parte se podria descartar ), algun plugin que no este debidamente instalado o incluso los permisos que tenga el usuario si no tiene permisos por lo menos de lectura el servidor va a estar rechazando las peticiones debido a que no se cuentan con autorizacion para atender las peticiones. 
+Tambien si el servidor tiene acceso a la red local y se comunica con otros elementos del segmento de red, y el usuario que presenta afectaciones esta en otra locacion queriendo acceder a la red, seria una buena opcion monitorear la salud del proveedor de servicio de internet donde se encuentra el servidor, ya que a veces los tiempos de subida y de bajada se pueden saturar o caer por la alta demanda en determinadas horas del dia. 
 
 
